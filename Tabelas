@@ -1,5 +1,6 @@
 Documento contendo o motivo de cada tabela e seus atributos:
 
+Tabela candidatos serve para agrupar os dados de indentificação e as informações de cada candidatos, assim nos retorna um id de identificação.  
 candidatos:
   id_candidatos - será gerado um id conforme a inscrição do candidato, iniciando pelo id '1'.
   nome - nome do candidato 
@@ -12,6 +13,7 @@ candidatos:
   skills - qualidade principal do candidato
   estado - estado de residência do candidato
   
+Tabela vagas serve para agrupar as informações das vagas e nos retornar um id de identificação.  
 vagas:
   id_vagas - será gerado um id conforme o cadastro de vagas no sistema, iniciando pelo id '1'.
   setor - para qual setor a vaga irá indicar um candidato
@@ -22,7 +24,8 @@ vagas:
   projecao_contratacao - Data projetada para o início de trabalho do candidato
   nivel - O grau mínimo para a vaga (estagiário, junior, pleno, senior...)
   regime_trabalho - Tipo de trabalho (remoto, presencial, hibrido...)
-  
+ 
+A tabela aplicações nos ajuda a agrupar todas as informções necessárias para um aplicação a uma determinada vaga, gerando um id de identificação. 
 aplicacoes:
   id_aplicacoes - será gerado um id conforme as aplicações dos candidatos no sistema, iniciando pelo id '1'.
   candidatos_id_candidatos - o id referenciando o candidato
@@ -31,6 +34,7 @@ aplicacoes:
   data_encerramento - data em que foi encerrada a aplicação
   resultado - 1 de o candidato foi aprovado, 0 se o candidato foi reprovado
 
+Na tabela etapas dos processos, podemos agrupar as informações de cada etapa, detalhar cada uma, e gerar um id de identificação 
 etapas_processo:
   id_etapas - será gerado um id conforme a ordem das etapas, iniciando pelo id '1'.
   etapas - o nome das etapas (cadastro, entrevista com RH, entrevista com gestor, proposta, contratação)
@@ -39,13 +43,16 @@ etapas_processo:
   aplicacoes_id_aplicacoes - o id referenciando a aplicação para vaga
   recrutador_id_recrutador - o id referenciando os recrutadores
 
+Na tabela recrutador podemos reunir as informações do recrutador, retornando um id de identificação
 recrutador:
   id_recrutador - identificação gerada no cadastr do recrutador 
   nome - nome do recrutador
   setor - setor/função do recrutador
   empresa - empresa a qual pertence(pode ser tercerizada)
   
-Repositório:
+
+Tabela repositório etapas podemos armazenar as informações das etapas que já foram encerradas.
+Repositório_etapas:
   inicio - data de início da aplicação
   fim - data de encerramento da aplicação
   etapas_processo_id_etapas - identificação referenciando a etapa do processo
