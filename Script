@@ -1,0 +1,98 @@
+DROP SCHEMA IF EXISTS `blueRH`;
+
+CREATE SCHEMA IF NOT EXISTS `blueRH`;
+USE `blueRH`;
+
+DROP TABLE IF EXISTS `blueRH`.`candidatos` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`candidatos` (
+  `id_candidatos` INT NOT NULL AUTO_INCREMENT,
+  `nome` TEXT NULL,
+  `cpf` VARCHAR(11) NULL,
+  `cidade_atual` TEXT NULL,
+  `formacao` TEXT NULL,
+  `anos_experiencia` INT NULL,
+  `idade` INT NULL,
+  `nivel` TEXT NULL,
+  `skills` TEXT NULL,
+  `estado` TEXT NULL,
+  PRIMARY KEY (`id_candidatos`));
+
+DROP TABLE IF EXISTS `blueRH`.`vagas` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`vagas` (
+  `id_vagas` INT NOT NULL AUTO_INCREMENT,
+  `setor` TEXT NULL,
+  `requisito` TEXT NULL,
+  `salario` FLOAT NULL,
+  `data_abertura` DATE NULL,
+  `formacao` TEXT NULL,
+  `projecao_contratacao` DATE NULL,
+  `nivel` TEXT NULL,
+  `regime_trabalho` TEXT NULL,
+  PRIMARY KEY (`id_vagas`));
+
+DROP TABLE IF EXISTS `blueRH`.`aplicacoes` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`aplicacoes` (
+  `id_aplicacoes` INT NOT NULL AUTO_INCREMENT,
+  `candidatos_id_candidatos` INT NOT NULL,
+  `vagas_id_vagas` INT NOT NULL,
+  `data_aplicacao` DATE NULL,
+  `data_encerramento` DATE NULL,
+  `resultado` BIT NULL,
+  PRIMARY KEY (`id_aplicacoes`),
+  CONSTRAINT `fk_aplicacoes_candidatos`
+    FOREIGN KEY (`candidatos_id_candidatos`)
+    REFERENCES `blueRH`.`candidatos` (`id_candidatos`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aplicacoes_vagas1`
+    FOREIGN KEY (`vagas_id_vagas`)
+    REFERENCES `blueRH`.`vagas` (`id_vagas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+DROP TABLE IF EXISTS `blueRH`.`recrutador` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`recrutador` (
+  `id_recrutador` INT NOT NULL AUTO_INCREMENT,
+  `nome` TEXT NULL,
+  `setor` TEXT NULL,
+  `empresa` TEXT NULL,
+  PRIMARY KEY (`id_recrutador`));
+
+DROP TABLE IF EXISTS `blueRH`.`etapas_processo` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`etapas_processo` (
+  `id_etapas` INT NOT NULL AUTO_INCREMENT,
+  `etapa` TEXT NULL,
+  `prazo` INT NULL,
+  `local` TEXT NULL,
+  `aplicacoes_id_aplicacoes` INT NOT NULL,
+  `recrutador_id_recrutador` INT NOT NULL,
+  PRIMARY KEY (`id_etapas`),
+  CONSTRAINT `fk_etapas_processo_aplicacoes1`
+    FOREIGN KEY (`aplicacoes_id_aplicacoes`)
+    REFERENCES `blueRH`.`aplicacoes` (`id_aplicacoes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_etapas_processo_recrutador1`
+    FOREIGN KEY (`recrutador_id_recrutador`)
+    REFERENCES `blueRH`.`recrutador` (`id_recrutador`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+DROP TABLE IF EXISTS `blueRH`.`Repositorio_etapas` ;
+
+CREATE TABLE IF NOT EXISTS `blueRH`.`repositorio_etapas` (
+  `etapas_processo_id_etapas` INT NOT NULL,
+  `início` DATE NULL,
+  `fim` DATE NULL,
+  CONSTRAINT `fk_repositorio_id_etapas_etapas_processo1`
+    FOREIGN KEY (`etapas_processo_id_etapas`)
+    REFERENCES `blueRH`.`etapas_processo` (`id_etapas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
