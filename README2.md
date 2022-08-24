@@ -1,4 +1,4 @@
-Projeto 2
+# Projeto 2
 Entrega
 Cada aluno deverá apresentar seu projeto no Power BI ou equivalente (outra ferramenta de visualização de dados).
 O projeto deve ser entregue até o dia 19/08/2022 ás 18 horas.
